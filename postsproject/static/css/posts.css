@@ -1,0 +1,22 @@
+.content{
+width:60%;
+float:left;
+background-color:#76cca5;
+color:white;
+padding:0 0 0 30px;
+height:100%;
+}
+.sidebar{
+width:40%;
+float:right;
+height:100%;
+}
+h1{
+text-align:center;
+border-bottom:1px solid yellow;
+padding-bottom:10px;
+}
+#data{
+color:black;
+font-style:italic;
+}

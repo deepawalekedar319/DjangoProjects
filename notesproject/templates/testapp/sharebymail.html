@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{%extends 'testapp/base1.html'%}
+{%block body1_block%}
+{% if send%}
+	<h1>Mail Successfully sent</h1>
+	<h2>post : {{post.title}} send by mail </h2>
+	{%else%}
+<u><h1> Share "{{post.title}}" by Email </h1></u> <br>
+		<form method="post">
+			{{form.as_p}}
+			{%csrf_token%}
+			<input type='submit' class='btn btn-lg btn-danger' value='Send Mail'><br><br>
+		</form>
+		{%endif%}
+	 {%endblock%}	

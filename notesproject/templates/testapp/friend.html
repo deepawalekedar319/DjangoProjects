@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+{% extends 'testapp/base.html'%}
+ {%block body_block%}
+ <div align='center'>
+	<u><h1>Users</h1></u><hr>
+ </div>
+ {%for name in user1%}
+ <ul>
+ <li> <h2 style="color:#9b34eb;">{{name}}</h2></li>
+</ul>
+ {%endfor%}
+ {%endblock%}

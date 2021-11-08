@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+{%extends 'testapp/base1.html'%}
+{%block body1_block%}
+		<form method="post">
+			{{form.as_p}}
+			{%csrf_token%}
+			<input type='submit' class='btn btn-lg btn-danger' value='signup'><br><br>
+			<a href="/accounts/login" class='btn btn-default btn-lg btn-success'>login</a>
+	 {%endblock%}	

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static "css/fz.css"%}">
+    <style>
+	u{
+	color:black;
+	}
+	h1,h2{
+	color:white;
+	}
+		body{
+		background:url("https://images-na.ssl-images-amazon.com/images/I/61XN88EMGJL._SL1000_.jpg");
+		background-repeat:no-repeat;
+		background-size:cover;
+		}
+		form{
+		color:white;
+		font-size:20px;
+		}
+	</style>
+  <title>Note's blog</title>
+ </head>
+ <body>
+  <div  class="container" id='signup'>
+	<div  align='center'>
+	<u><h1 id='fonts'>Note's blog</h1></u><br><br>
+	{%block body1_block%}
+  {%endblock%}		
+	</div>
+  </div>
+</body>
+</html>

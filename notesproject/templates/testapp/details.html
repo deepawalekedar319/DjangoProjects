@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% extends 'testapp/base1.html'%}
+ {%block body1_block%}
+<u><h2>Details</h2></u>
+<h4>Fullname &nbsp; : &nbsp;{{ request.user.first_name }}</h4> 
+<h4>Username &nbsp;: &nbsp;&nbsp;{{ request.user.username }}</h4> 
+<h4>Email &nbsp;:&nbsp;&nbsp;{{ request.user.email }}</h4> 
+<h4>Date Joined &nbsp;: &nbsp;&nbsp;{{ request.user.date_joined }}</h4> 
+<h4>Last login &nbsp;: &nbsp;&nbsp;{{ request.user.last_login }}</h4><br> 
+<u><h2>Update</h2></u><br>
+<form method="post">
+        {%csrf_token%}
+        Full Name &nbsp;: &nbsp;<input type="text" name="eno" value="{{request.user.first_name}}"><br><br>
+        Username &nbsp;: &nbsp;<input type="text" name="ename" value="{{request.user.username }}"><br><br>
+        Email &nbsp;: &nbsp;&nbsp;<input type="text" name="esal" value="{{request.user.email}}"><br><br>
+        <input type="submit" class='btn btn-danger' value="Update ">
+      </form>
+   {%endblock%}

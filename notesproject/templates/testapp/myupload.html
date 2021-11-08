@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% extends 'testapp/base.html'%}
+ {%block body_block%}
+  {%block content%}
+  <u><h1>My all posts </h1></u><hr>
+   {%if tag%}
+  <h1>posts tagged with '{{tag.name}}'</h1>
+  {%endif%}
+  {%for post in post_list%}
+  <a href="{{post.get_absolute_url}}"><h3>{{post.title}}</h3></a>
+  <p style="color:#a83293;">published on {{post.publish}} by {{post.author|title}}</p>
+  <p> <span style="color:red;font-size:20px;">Tags : </span> 
+  {%for tag in post.tags.all%}
+  <a href="{%url 'post_list_by_tag_name' tag.slug %}" class="btn btn-primary btn-deafult">{{tag.name}}</a>
+  {%if not forloop.last%},{%endif%}
+  {%endfor%}
+  </p>
+  {{post.body|truncatewords:30|linebreaks}}
+  {%endfor%}
+  {%include 'testapp/pagination.html' with page=post_list%}
+	 {%endblock%}
+  {%endblock%}
