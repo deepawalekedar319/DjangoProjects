@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{%extends 'testapp/base.html'%}
+{%load blog_tags%}
+{%block title%}posts - Blog{%endblock%}
+{%block content%}
+	<u><h1><span class="glyphicon glyphicon-certificate"> <u>CSE-blog</u></h1></u>
+	{%for post in post_list%}
+		<h2>* <a href="{{post.get_absolute_url}}">{{post.title}}</a></h2>
+		<h4><p id='date'> published on <u>{{post.publish}} by <a href="/{{post.id}}/get-users-post"><strong><em><u>{{post.author}}</u></em></strong></a></p></u></h4>
+		{{post.body | truncatewords:30 |linebreaks}}
+		<hr>
+	{%endfor%}
+	{%include 'testapp/pagination.html' with page=post_list%}
+{%endblock%}
+{%block sidebar%}
+	<h4>* The total number of post : </h4> 
+	<h1 align="center" style="color:blue">{%total_posts%}</h1><br>
+	<h4>* Recently added posts : </h4>
+	<h4>{%show_latest_posts%}</h4><br>
+	<h4>* Most commented posts</h4>
+	{%get_most_commented_posts as most_commented_posts%}
+	<ul>
+		{%for post in most_commented_posts%}
+			<h4><li><a href="{{post.get_absolute_url}}">{{post.title}}</a></li></h4>
+		{%endfor%}
+	</ul>
+	{%block search%}
+	{%endblock%}
+{%endblock%}

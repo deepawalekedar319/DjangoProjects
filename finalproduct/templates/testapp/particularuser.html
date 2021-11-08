@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{%extends 'testapp/base.html'%}
+{%load blog_tags%}
+{%block title%}All posts of {{post.author}}{%endblock%}
+{%block image%}
+	<h1 align="center"> All posts of <u> <strong><em><u>{{post.author}}</u></em></strong></u></h1>
+	   <div class="row mt-3">
+  	<div class="col-md-2" style="bacckground-color:white;padding:0 0 0 30px;
+		height:100%;">
+  		<div class="list-group" style="background-color:white;">
+		<!-- 	Implement side blog -->
+		<h3><u>Details</u> :</h3><br>
+		<h4>* The total number of post by {{post.author}} :  </h4> 
+	<h1 align="center" style="color:blue">{{total}}</h1><br>
+	<h4>* Recently added posts : </h4>
+	<h4>{%show_latest_posts%}</h4><br>
+	<h4>* All posts </h4>
+	<a class="dropdown-item" href="#">{%show_all_posts%}</a><br>
+	<h4>* Most commented posts</h4>
+	{%get_most_commented_posts as most_commented_posts%}
+	<ul>
+		{%for post in most_commented_posts%}
+			<h4><li><a href="{{post.get_absolute_url}}">{{post.title}}</a></li></h4>
+		{%endfor%}
+	</ul>
+  	</div>
+  	</div>
+	{%for i in allposts%}
+		<div style="margin:10px;padding-right:10px;padding-left:10px;">
+			<h2>* <a href="{{i.get_absolute_url}}">{{i.title}}</a></h2>
+		<h4><u><p id='date'> published on {{i.publish}} by {{i.author}}</p></u></h4>
+		{{i.body | truncatewords:30 |linebreaks}}
+		<hr>
+		</div>
+	{%endfor%}
+{%endblock%}

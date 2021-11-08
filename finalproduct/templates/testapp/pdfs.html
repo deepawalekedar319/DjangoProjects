@@ -1,0 +1,35 @@
+<!doctype html>
+{%extends 'testapp/base.html'%}
+{%load blog_tags%}
+{%block title%}pdf - Blog{%endblock%}
+{%block image%}
+	   <div class="row mt-3">
+  	<div class="col-md-2" style="bacckground-color:white;padding:0 0 0 30px;
+		height:100%;">
+  		<div class="list-group" style="background-color:white;">
+		<!-- 	Implement side blog -->
+		<h4>* The total number of post : </h4> 
+	<h1 align="center" style="color:blue">{%total_posts%}</h1><br>
+	<h4>* Recently added posts : </h4>
+	<h4>{%show_latest_posts%}</h4><br>
+	<h4>* Most commented posts</h4>
+	{%get_most_commented_posts as most_commented_posts%}
+	<ul>
+		{%for post in most_commented_posts%}
+			<h4><li><a href="{{post.get_absolute_url}}">{{post.title}}</a></li></h4>
+		{%endfor%}
+	</ul>
+  	</div>
+  	</div>
+	<div class="card"style="float:left;padding:10px;margin:10px;">
+		{%for i in pdfs%}
+		<strong><em><u><a href="{{i.get_absolute_url}}"  class="heading"><h3>{{i.title}}</h3></a></u></em></strong>
+		<P>published on <strong><u>{{i.publish}} by <em><a href="/{{i.id}}/get-users-post">{{i.author}}</a></em></u></strong></p>
+		pdf : 
+			<a href="{{i.notesfiles.url}}" class="btn btn-primary"target="_blank"> {{i.notesfiles}}</a>&nbsp;&nbsp;
+		<a href="{{post.notesfiles.url}}"  download="{{post.notesfiles.url}}" >Download</a>&nbsp;&nbsp;
+		<a href="/{{i.id}}/share"  target="_blank" >share</a>
+		<p></p>
+	{%endfor%}
+	</div>
+{%endblock%}

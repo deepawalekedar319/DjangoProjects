@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+{%extends 'testapp/base.html'%}
+{%block title%}{{post.title}}{%endblock%}
+{%block data%}
+	<h2><strong><u>{{post.title}}</u></strong></h2>
+	<p>{{post.body}}</p>
+	<div class="col-md-10" id="imagesview">
+	<div class="row mt-3">
+		<div class="col-md-12">
+			<div class="card-columns">
+				<div class="card" >
+				<a href="#"  class="heading"><h3>{{i.title}}</h3></a>
+				{%if image%}
+				<img src="/media/{{post.image}}" class="card-img-top" alt="..." style="border:2px solid black;" height="300" width="300">
+				<div class="card-body">
+				<div id="uploaddetials">
+					<p> published on <u>{{post.publish}}</u> by <a href="/{{post.id}}/get-users-post"><span class="author">{{post.author}}</span></a> </p>
+				</div>
+				<a href="#" class="btn btn-primary" onclick="showModel('{{post.image}}')">View</a>&nbsp;
+				<a href="/{{post.id}}/share" type="button" class="btn btn-primary" data-dismiss="modal" target="_blank">share</a>
+				<br><br>
+				{%else%}
+				{%endif%}
+				{%if pdf%}
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal">
+				 Show PDF
+				</button>
+
+				<!-- Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  <div class="modal-dialog" role="document">
+					<div class="modal-content">
+					  <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel"><u>{{post.title}}</u> pdf</h4>
+					  </div>
+					  <div class="modal-body">
+						<a href="{{post.notesfiles.url}}" target="_blank">{{post.notesfiles}}</a>
+					  </div>
+					  <div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<a href="{{post.notesfiles.url}}"  download="{{post.notesfiles.url}}" type="button" class="btn btn-primary">Download</a>
+					  </div>
+					</div>
+				  </div>
+				</div>
+				<!-- <h3>pdf</h3>
+				 -->
+				{%else%}
+				{%endif%}
+				<br><br>
+				<a href="/{{post.id}}/share" class="btn btn-success" target="_blank">share post by mail</a> 
+	<div class="modal" id="image-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">{{post.title}}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="#" id="image-show" class="img-fluid" height="250" width="250">
+      </div>
+      <div class="modal-footer">
+	  <a href="/media/{{post.image.url}}" download="/media/{{post.image.url}}"class="btn btn-primary">Download</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<hr>
+{%with comments.count as comment_count%}
+	<h2>{{comment_count}} Comment {{comments_count|pluralize}}</h2>
+{%endwith%}
+{%if comments%}
+	{%for comment in comments%}
+		<u><p>Comment {{forloop.counter}} by {{comment.name}} on {{comment.created}}</p></u>
+		<h4>{{comment.body|linebreaks}}</h4>
+		<hr>
+	{%endfor%}
+{%else%}
+	<h3>There are no comments yet !! </h3>
+{%endif%}
+{%if csubmit%}
+	<h2>Thanks for your comment</h2>
+{%else%}
+	<form method="post">
+		{{form.as_p}}
+		{%csrf_token%}
+		<input type="submit" value="comment">
+	</form>
+{%endif%}	
+<script>
+		function showModel(imageUrl){
+			$('#image-model').modal('show');
+			$('#image-show').attr('src',`/media/${imageUrl}`); 
+		}
+	</script>
+	<!-- <img src="/media/{{post.image}}" height="250" width="250" alt="No image">
+	 -->
+	 <br><br><br><br><br><br><br>
+{%endblock%}
