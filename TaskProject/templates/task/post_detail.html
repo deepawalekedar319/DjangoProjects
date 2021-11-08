@@ -1,0 +1,46 @@
+<!doctype html>
+{%extends 'task/base.html'%}
+{%block title%} {{post.title}}{%endblock%}
+{%block body%}
+	<div class="data">
+		<h1 align="center"><u>{{post.title}}</u></h1> <span style="color:red;font-size:25px;">Ratings :</span> <span style="color:blue; font-size:30px;"><strong>{{rate}}/10</strong></span>
+		<p id="date"  align="center"><u><strong>Published on :</strong></u> {{post.publish}} by <u><strong>{{post.author}}</strong></u></p><br>
+		{{post.body|linebreaks}}<br><br>
+		<a href="/{{post.id}}/share" class="btn-lg btn-success">Share post by mail </a>&nbsp;&nbsp;
+		<a href=" /{{post.id}}/rate-post" class="btn btn-warning"><span class="glyphicon glyphicon-star"></span> Rate </a> &nbsp;&nbsp; <br><br>
+		 {%if comments%}
+			  {%for comment in comments%}
+				   <u><h4><h4><p><span style="color:#eb34e5;">Comment {{forloop.counter}} </span><strong>:</strong> By {{comment.name}} on {{comment.created}}</p></h4></h4></u>
+				   <div style="font-size:25px;"> {{comment.body|linebreaks}}</div>
+					 <div class="reply">
+					   <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse{{comment.sno}}" aria-expanded="false" aria-controls="collapseExample">
+						Reply </button>	
+						<div class="collapse" id="collapse{{comment.sno}}">
+					  <div class="card card-body">
+						<form method="post">
+								{{form.as_p}}
+								<input type="hidden" name="parentSno" value="{{comment.sno}}">	
+								 {%csrf_token%}	
+								<input type="hidden" name="postSno" value="{{post.id}}">	
+               <input type="submit" class='btn btn-success btn-lg' value="Submit"><br><br>
+             </form>
+					  </div>
+					</div>
+			 </div>
+         {%endfor%}
+         <hr>
+      {%endif%}
+      {%if csubmit %}
+          <h2 >Your Comment Added Successfully </h2>
+          {%else%}
+		  {% with comments.count as comments_count%}
+          <h4>{{comments_count}} Comment{{comments_count|pluralize}}</h4><br>
+		   {%endwith%}
+             <form method="post">
+               {{form.as_p}}
+               {%csrf_token%}
+               <input type="submit" class='btn btn-success btn-lg' value="Submit Comment"><br><br>
+             </form>
+        {%endif%}
+	</div>
+{%endblock%}

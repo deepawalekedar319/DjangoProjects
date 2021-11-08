@@ -1,0 +1,15 @@
+<ul>
+{%for post in latest_posts%}
+<li style="padding-bottom:10px;"><a href="{{post.get_absolute_url}}" >{{post.title}}</li></a>
+{%endfor%}
+</ul>
+
+<ul>
+{%for post in latest_search%}
+<li><h3><a href="{{post.get_absolute_url}}">{{post.title}}</li></h3></a>
+{%endfor%}
+</ul>
+
+
+
+

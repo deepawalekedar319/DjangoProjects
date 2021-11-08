@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{%load staticfiles%}
+<html lang="en">
+ <head>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+   <title>signup -- for blog</title>
+   <style type="text/css">
+		.body{
+	width:70%;
+	float:left;
+	margin-top:5%;
+	margin-left:15%;
+	background-color:white;
+	box-shadow:5px 10px 30px rgb(0,0,0,0.9);
+}
+body{
+	box-shadow:5px 10px 30px rgba(255,0,0,0.1	);
+}
+   </style>
+   </head>
+ <body>
+ <div  class="body" align="center">
+	<form method="post" id="login">
+	<h1>signup </h1><br><hr>
+		{{form.as_p}}
+		{%csrf_token%}<br>
+		<input type="submit" value="signup" class="btn btn-primary" id="loginbutton" ><br><br>
+		<a href="/accounts/login" class="btn btn-primary" id="loginbutton">login</a><br><br>
+			<a href="/" class="btn btn-primary">Log in as guest</a><br><br>
+	</form>
+ </div>
+ 	</body>
+</html>

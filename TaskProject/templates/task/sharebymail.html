@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{%extends 'task/base.html'%}
+{%block title%}Share {{post.title}} by mail{%endblock%}
+{%block body%}
+{% if sent%}
+	<h1>Mail Successfully Sent</h1>
+	<h2>POST : {{post.title}} send by mail </h2><br>
+	
+	<a href="/" class="btn-lg btn-success" style="margin-left:40%;">Home</a><br><br>
+	{%else%}
+	<div  class="mail">
+<u><h1> Share "{{post.title}}" by Email </h1></u> <br>
+		<form method="post">
+			{{form.as_p}}
+			{%csrf_token%}
+			<input type='submit' class='btn btn-lg btn-danger' value='Send Mail'><br><br>
+		</form>
+		</div>
+		{%endif%}
+	 {%endblock%}	

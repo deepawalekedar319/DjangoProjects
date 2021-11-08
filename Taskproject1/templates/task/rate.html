@@ -1,0 +1,26 @@
+{% extends 'task/base.html' %}
+{%block title%} Rate {{post.title}}{%endblock%}
+{% block body %}
+<style type="text/css">
+	.rateme li{
+		display:inline;
+		padding:5px;
+		 margin-right:5px;
+		 margin-left:5px; 
+	}
+</style>
+	<h2 align="center">Rate : <a href="{{post.get_absolute_url}}">{{post.title}}</a> </h2>
+			<p id="date" align="center"><u><strong>Published on :</strong></u> {{post.publish}} by <u><strong>{{post.author}}</strong></u></p><br><br>
+
+              <div align="center">
+				<form method="post" action="" role="form" class="col s12">
+                {% csrf_token %}
+                 <div class="rateme">
+					{{ form.rate }}
+                 </div>
+     
+                     <button type="submit" name="action" class="btn btn-lg btn-primary"> <span class="glyphicon glyphicon-star"></span> Rate </button><br><br>
+            </form>
+              </div>
+
+{% endblock %}

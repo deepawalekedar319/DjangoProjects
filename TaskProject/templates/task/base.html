@@ -1,0 +1,193 @@
+<!doctype html>
+{%load blog_tags%}
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>{%block title%}{%endblock%}</title>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style type="text/css">
+	body{
+	margin:0px;
+	padding:0px;
+	font:Poppins;
+}
+#main{
+	width:100%;
+	height:20vh;
+	position:relative;
+}
+nav{
+	/* margin-top:10px; */
+	padding-top:10px;
+	display:flex;
+	justify-content:space-around;
+	align-items:center;
+	position:fixed;
+	right:0;
+	left:0;
+	width:100%;
+	background-color:white;
+	box-shadow:5px 10px 30px rgba(255,0,0,0.1	);
+	z-index:1;
+}
+#logo img{
+	height:40px;
+	width:65px;
+}
+.items{
+	list-style:none;
+}
+.items a{
+	text-decoration:none;
+}
+.items a li , #drp{
+	height:40px;
+	line-height:43px;
+	/* margin:3px; */
+	margin-left:3px;
+	margin-right:3px;
+	padding:10px 22px;
+	display:flex;
+	font-size:0.8em;
+	text-transform:uppercase;
+	font-weight:500;
+	letter-spacing:1px;
+	color:gray;
+	display:inline;
+}
+#hi{
+	color:#39bfbd;
+	font-weight:500;
+	font-size:0.9em;
+	border-bottom:2px solid #39bfbd;
+}
+.items a li:hover{
+	background-color:#23cdaf;
+	color:white;
+	box-shadow:5px 10px 30px rgba(24,139,119,0.2);
+	transition:all ease 0.2s;
+}
+.body{
+	width:70%;
+	float:left;
+	margin-left:50px;
+	background-color:white;
+	box-shadow:5px 10px 30px rgb(0,0,0,0.5);
+}
+.sidebar{
+	width:20%;
+	float:right;
+	margin-right:20px;
+	background-color:white;
+	box-shadow:5px 10px 30px rgb(0,0,0,0.5);
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  color:red;
+}
+
+#drp:hover{
+	background-color:#23cdaf;
+	color:white;
+	box-shadow:5px 10px 30px rgba(24,139,119,0.2);
+	transition:all ease 0.2s;
+}
+#date{
+	
+}
+.data{
+	margin-left:10px;
+	margin-right:10px;
+	text-decoration:justify;
+}
+.details{
+	height:100%;
+	margin:10px;
+	text-decoration:justify;
+}
+.mail{
+	margin-left:20%;
+}
+.btnlike:hover{
+	/* background-color:#774ef2; */
+}
+.btnlogo:hover{
+	background-color:white;
+	height:50px;
+}
+  </style>
+ </head>
+ <body>
+		<section id="main">
+			<nav>
+				<a href="#" id="logo"><img src="http://static1.squarespace.com/static/56deafb945bf21f27e147a60/t/5b8fc4ab0e2e721961586a84/1582117177080/?format=1500w" alt="No		logo"></a>
+					<ul class="items">
+					<a href="/"><li>Home</li></a>
+					<a href="/upload"><li>Add post</li></a>
+					<!-- <a href="#"><li>Recent</li></a>
+					<a href="#"><li>Clients</li></a>
+					<a href="#"><li>Contact Us</li></a> -->
+					<div class="dropdown">
+						  <span id="drp">Categories</span>
+						  <div class="dropdown-content">
+							{%show_latest_posts%}
+						  </div>
+						</div>
+					<form class="navbar-form navbar-right" method='get' action='/search'>
+					<div class="form-group">
+						 <input type="text" class="form-control" placeholder="Search" name='query' id='query'>
+					</div>
+					<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+				   </form>
+					</ul>
+						<div class="dropdown">
+						  <span id="drp">Create or signin</span>
+						  <div class="dropdown-content">
+								<a href="/accounts/login" id="hi"><strong>Login </strong></a><br><br>
+								<a href="/accounts/logout" id="hi"><strong>Logout </strong></a><br><br>
+								<a href="/signup" id="hi"><strong>Signup </strong></a>
+						  </div>
+						</div>
+				</nav>
+		</section>
+		<div class="body">
+			{%block body%}
+			{%endblock%}
+		</div>
+		<div class="sidebar">
+			{%block sidebar%}
+	<h3 style="padding-left:19px;">Total number of posts : </h3>
+	<strong><h2 style="padding-left:43%; color:red;">{%total_posts%}</h2></strong><hr>
+	<h3 style="padding-left:19px;">Latest posts : </h3>
+	<ul>
+		<h4><li>{%show_latest_posts%}</li></h4>
+	</ul><hr>
+	<h3 style="padding-left:19px;">Most Commented Post's</h3>
+	{%get_most_commented_posts as most_commented_posts%}
+	<ul>
+		{%for post in most_commented_posts%}
+			<h4 style="padding-left:19px;"><li ><a href="{{post.get_absolute_url}}" >{{post.title}}</a></li></h4>
+		{%endfor%}
+	</ul><br><br>
+{%endblock%}
+		</div>
+ </body>
+</html>

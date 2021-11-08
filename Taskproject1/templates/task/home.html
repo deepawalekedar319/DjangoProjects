@@ -1,0 +1,30 @@
+<!doctype html>
+{%extends 'task/base.html'%}
+{% load blog_tags %}
+{%block title%} All Posts {%endblock%}
+{%block body%}<br>
+	{%for p in post_list%}
+		<div class="data">
+			<a href="{{p.get_absolute_url}}"><u><h3>{{p.title}}</h3></u></a>
+		<p id="date"><u><strong>Published on :</strong></u> {{p.publish}} by <u><strong>{{p.author}}</strong></u></p>
+		{{p.body|truncatewords:30|linebreaks}}
+		<form  action="{%url 'like-post' %}" method='POST' class="ui form">
+			<input type="hidden" name = "post_id" value="{{p.id}}">	
+			{%if user not in p.liked.all%}
+			  <button class="btn btn-info btn">
+          <span class="glyphicon glyphicon-thumbs-up"></span> Like
+        </button>&nbsp;&nbsp;
+				{%csrf_token%}
+			{%else%}
+				  <button class="btn-primary  btn">
+          <span class="glyphicon glyphicon-thumbs-down"></span> Unike
+        </button>
+				{%csrf_token%}	
+			{%endif%}	
+		</form>
+		<strong>{{p.liked.all.count}} Likes</strong>
+		</div><br>
+	{%endfor%}		
+	{%include 'task/pagination.html' with page=post_list%} <br><br>
+{%endblock%}
+

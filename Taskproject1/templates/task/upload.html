@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{%extends 'task/base.html'%}
+  {%block title%}Upload -- post{%endblock%}
+ {%block body%}
+  <div style="padding-left:20px;padding-top:20px;">
+ </div>
+<div align="center" class="uploadpage" >
+<h1> Upload </h1><hr><br>
+	<div id="uploadform" >
+	<form method="post" enctype="multipart/form-data" >
+	{{user.as_p}}
+	{%csrf_token%}<br>
+	<input type="submit" class="btn btn-primary" value="upload"><br><br><br>
+</form>
+</div>
+</div>
+{%endblock%}
