@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{%load staticfiles%}
+<html lang="en">
+ <head>
+  <title>Upload --</title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "css/imagepost.css"%}">
+ </head>
+ <body>
+  <div style="padding-left:20px;padding-top:20px;">
+	<a href="/" class="btn btn-primary">Back</a>
+ </div>
+<div align="center" class="uploadpage" >
+<h1>** Upload **</h1><hr><br>
+	<div id="uploadform" >
+	<form method="post" enctype="multipart/form-data" >
+	{{user.as_p}}
+	{%csrf_token%}<br>
+	<input type="submit" class="btn btn-primary" value="upload"><br><br>
+</form>
+</div>
+</div>
+ </body>
+</html>

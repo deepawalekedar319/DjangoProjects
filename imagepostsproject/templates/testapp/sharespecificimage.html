@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{%load staticfiles%}
+<html lang="en">
+ <head>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+ <link rel="stylesheet" href="{% static "css/imagepost.css"%}">
+  <title>Image's blog</title>
+ </head>
+ <body>
+ <div style="padding-left:20px;padding-top:20px;">
+	<a href="/" class="btn btn-primary">Back</a>
+ </div>
+<div align="center" style="background-color:#c5e67e" id="detailimage">
+	<h4 class="imageview"><hr>{{post.title}}</hr></h4><h6>uploaded by {{post.author}}.</h6> on {{post.publish}}<br><hr>
+	<img src="/media/{{post.body}}"  alt="..." width="500" height="400"><br><br>
+	<a href="/{{post.id}}/share" class="btn btn-primary" >share</a><br><br>
+</div>
+<div style="background-color:#c5e67e">
+			<div  class="container">
+			{% with comments.count as comments_count%}
+        <h2>{{comments_count}} Comment{{comments_count|pluralize}}</h2>
+      {%endwith%}<div id="" class="">
+		
+      </div>
+      {%if comments%}
+        {%for comment in comments%}
+             <u><h4><h3><p><span style="color:#eb34e5;">Comment {{forloop.counter}} </span><strong>:</strong> By {{comment.name}} on {{comment.created}}</p></h3></h4></u>
+             <div style="font-size:25px;"> {{comment.body|linebreaks}}</div>
+         {%endfor%}
+         <hr>
+          {%else%}
+            <p>There are no Comments Yet!!!</p><hr>
+      {%endif%}
+      {%if csubmit %}
+          <h2 >Your Comment Added Successfully </h2>
+          {%else%}
+          <u><h2 style="color:red;">Add comments here !!</h2></u><br>
+             <form method="post">
+               {{form.as_p}}
+               {%csrf_token%}
+               <input type="submit" class='btn btn-success btn-lg' value="Submit Comment">
+             </form>
+			 <br><br>
+        {%endif%}
+        </div>
+        </div>
+		</body>
+</html>

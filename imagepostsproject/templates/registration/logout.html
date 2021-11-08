@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{%load staticfiles%}
+<html lang="en">
+ <head>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+ <link rel="stylesheet" href="{% static "css/imagepost.css"%}">
+   <title>log out -- image's blog</title>
+   </head>
+ <body>
+ {%include 'testapp/navbar.html'%}<br>
+ <h1> successfully logout ...</h1><br><hr><br>
+	<div align="center">
+		<h2 class="h2tag"> Do you want to go to home page ?</h2><br>
+		<a href="/" id="loginbutton" class="btn btn-primary">Home</a><br><br>
+		<h2 class="h2tag"> Signup another account  ?</h2><br>
+		<a href="/signup" id="loginbutton" class="btn btn-primary">signup</a><br><br>
+		<h2 class="h2tag">Do you want to login again ?</h2><br>
+		<a href="/accounts/login" id="loginbutton" class="btn btn-primary">login</a>
+	</div>
